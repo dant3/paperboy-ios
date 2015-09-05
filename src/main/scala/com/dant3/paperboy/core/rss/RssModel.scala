@@ -1,4 +1,4 @@
-package com.dant3.paperboy.rss
+package com.dant3.paperboy.core.rss
 
 import java.util.Date
 

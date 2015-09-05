@@ -2,7 +2,7 @@ package com.dant3.paperboy.ui
 
 import java.net.URL
 
-import com.dant3.paperboy.rss.{RssFeed, RssItem, RssReader}
+import com.dant3.paperboy.core.rss.{RssFeed, RssItem, RssReader}
 import com.dant3.paperboy.util.{MainThread, NSLog, RxSeqDataSource}
 import org.robovm.apple.uikit.{UIRectEdge, UITableViewCell, UIViewController}
 import org.robovm.rt.bro.Bits
@@ -30,7 +30,7 @@ class RssFeedViewController extends UIViewController with RssFeedUi {
 
     loadFeed() onSuccess {
       case feed ⇒
-        getNavigationItem.setTitle(s"Paperboy: ${feed.title}")
+        getNavigationItem.setTitle(s"${feed.title}")
         feedDataSource.update(feed.items)
     }
   }

@@ -1,6 +1,6 @@
 package com.dant3.paperboy.ui
 
-import com.dant3.paperboy.rss.RssItem
+import com.dant3.paperboy.core.rss.RssItem
 import com.dant3.paperboy.util.CellBinder
 import org.robovm.apple.uikit.UITableViewCell
 

@@ -8,6 +8,5 @@ object Main extends IOSApplication {
   } catch {
     case failure: Throwable ⇒
       NSLog(s"Application crashed. Reason: ${NSLog.symbols(failure)}")
-      throw failure
   }
 }

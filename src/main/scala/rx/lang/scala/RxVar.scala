@@ -1,8 +1,9 @@
 package rx.lang.scala
 
+import java.util.concurrent.CopyOnWriteArraySet
 import java.util.concurrent.atomic.AtomicReference
 
-import com.github.dant3.amber.utils.focused.FocusedMutableSet
+import scala.collection.JavaConverters._
 
 final class RxVar[T] private(private val currentValue:AtomicReference[T]) extends RxVal[T] {
   import ImplicitFunctionConversions._
@@ -18,19 +19,18 @@ final class RxVar[T] private(private val currentValue:AtomicReference[T]) extend
   def := (newValue:T):Unit = update(newValue)
 
 
-  private val subscribers = new FocusedMutableSet[Subscriber[T]]
+  private val subscribers = new CopyOnWriteArraySet[Subscriber[T]].asScala
   override private[scala] val asJavaObservable = rx.Observable.create { subscriber: Subscriber[T] ⇒
-    subscribers.modify { set ⇒
-      set.retain(!_.isUnsubscribed)
-      if (set.add(subscriber)) {
-        subscriber.onStart()
-        subscriber.onNext(get)
-      }
+    subscribers.retain(!_.isUnsubscribed)
+    if (subscribers.add(subscriber)) {
+      subscriber.onStart()
+      subscriber.onNext(get)
     }
   }
+
   private def notifySubscribers(oldValue:T, newValue:T) = {
-    subscribers.read.view.filter(!_.isUnsubscribed).foreach(_.onNext(newValue))
-    subscribers.modify(_.retain(!_.isUnsubscribed))
+    subscribers.retain(!_.isUnsubscribed)
+    subscribers.view.filter(!_.isUnsubscribed).foreach(_.onNext(newValue))
   }
 }
 
