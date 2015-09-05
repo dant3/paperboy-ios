@@ -8,6 +8,7 @@ class PaperboyApplication extends UIApplicationDelegateAdapter {
 
   def window = this._window
   def window_= (window: UIWindow): Unit = {
+    this._window.foreach(removeStrongRef)
     this._window = Option(window)
     this._window.foreach(addStrongRef)
   }
