@@ -11,4 +11,13 @@
             <directory>src/main/assets</directory>
         </resource>
     </resources>
+    <forceLinkClasses>
+        <pattern>com.android.okhttp.HttpHandler</pattern>
+        <pattern>com.android.org.conscrypt.OpenSSLSocketFactoryImpl</pattern>
+        <pattern>com.android.org.conscrypt.OpenSSLProvider</pattern>
+        <pattern>org.apache.harmony.security.provider.cert.DRLCertFactory</pattern>
+        <pattern>com.android.org.bouncycastle.jce.provider.BouncyCastleProvider</pattern>
+        <pattern>org.apache.harmony.security.provider.crypto.CryptoProvider</pattern>
+        <pattern>com.android.org.conscrypt.JSSEProvider</pattern>
+    </forceLinkClasses>
 </config>

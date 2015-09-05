@@ -1,4 +1,6 @@
-import org.robovm.apple.foundation.{NSObject, NSAutoreleasePool}
+package com.dant3.paperboy.util
+
+import org.robovm.apple.foundation.{NSAutoreleasePool, NSObject}
 import org.robovm.apple.uikit.{UIApplication, UIApplicationDelegate}
 
 trait IOSApplication {
